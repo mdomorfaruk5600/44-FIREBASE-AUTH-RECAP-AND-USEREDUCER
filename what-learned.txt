@@ -1,11 +1,1 @@
-1. install firebase and initialize component as firebase component.
-    ===> npm install firebase --save
-        firebase.initializeApp(firebaseConf);
-
-2. sign in with popup.
-    const provider = new GoogleAuthProvider();
-    ==> signInWithPopup(getAuth(), provider).then(result => {
-        cl(result.user);
-    }).catch(error => {
-        cl(error.message);
-    })
+1. 44-3 create user context to share it with multiple components

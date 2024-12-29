@@ -10,11 +10,14 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 export const UserContext = createContext();
 
 function App() {
+
   const [loggedInUser, setLoggedInUser] = useState({
     isLoggedIn: false,
   });
+
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <p>Name: {loggedInUser.name}</p>
       <div className='App'>
       <BrowserRouter>
       <Header />
