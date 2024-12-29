@@ -7,7 +7,7 @@ const RequireAuth = ({children}) => {
     const location = useLocation();
     return (
         <div>
-            {loggedInUser.isLoggedIn ? children:<Navigate to={'/login'} state={{ form:{pathName:location.pathname} }} />}
+            {loggedInUser.email ? children:<Navigate to={'/login'} state={{ from: location.pathname }} />}
         </div>
     );
 };
