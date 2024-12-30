@@ -1,29 +1,29 @@
-useReducer() hook works like redux. 1st arg is callback function and second 
-arg is initial state / default state.
+1. The callback function have action obj. There are a type property. we need
+to switch this property. and we need to return new state based on this property.
 
-The callback function handle the action and change state. 
-The callback function take 2 arg . 1st is state and second is action. 
-The default state and callback function will defined outside of component function
-
-===================
-import React, { useReducer, useState } from 'react';
-
-const initialState = {count: 0};
-
+===============>
 const reducer = (state, action) => {
-
+    switch (action.type) {
+        case "INCREMENT":
+            return {count: state.count + 1};
+        case "DECREMENT":
+            return {count: state.count - 1};
+        default:
+            return state;
+    }
 }
+
+2. when call this dispatch method. Then we give a obj as arg. There are type property
+we will write the type on this property.
 
 const ReducerCount = () => {
     const [count, setCount] = useState(0);
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <div>
-            <h1>This is Reducer Count</h1>
+            <h1>This is Reducer Count: {state.count}</h1>
+            <button onClick={()=>dispatch({type:"INCREMENT"})}>increment</button>
+            <button onClick={()=>dispatch({type:"DECREMENT"})}>Decrement</button>
         </div>
     );
 };
-
-export default ReducerCount;
-
-
