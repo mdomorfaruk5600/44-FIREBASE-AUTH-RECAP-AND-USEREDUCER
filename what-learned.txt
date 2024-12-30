@@ -1,0 +1,29 @@
+useReducer() hook works like redux. 1st arg is callback function and second 
+arg is initial state / default state.
+
+The callback function handle the action and change state. 
+The callback function take 2 arg . 1st is state and second is action. 
+The default state and callback function will defined outside of component function
+
+===================
+import React, { useReducer, useState } from 'react';
+
+const initialState = {count: 0};
+
+const reducer = (state, action) => {
+
+}
+
+const ReducerCount = () => {
+    const [count, setCount] = useState(0);
+    const [state, dispatch] = useReducer(reducer, initialState);
+    return (
+        <div>
+            <h1>This is Reducer Count</h1>
+        </div>
+    );
+};
+
+export default ReducerCount;
+
+
