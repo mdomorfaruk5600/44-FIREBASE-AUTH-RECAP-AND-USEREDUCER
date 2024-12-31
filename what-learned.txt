@@ -1,29 +1,45 @@
-1. The callback function have action obj. There are a type property. we need
-to switch this property. and we need to return new state based on this property.
+1. useRef hook is used to handle input field and access jsx html element. For using
+it on multiple element or input field we need to use this hook multiple time;
+    ===> 
+        const nameRef = useRef();
+        <form>
+            <input ref={nameRef} />
+        </form>
 
-===============>
-const reducer = (state, action) => {
-    switch (action.type) {
-        case "INCREMENT":
-            return {count: state.count + 1};
-        case "DECREMENT":
-            return {count: state.count - 1};
-        default:
-            return state;
-    }
-}
+2. we need to add this hook var on field ref props.
 
-2. when call this dispatch method. Then we give a obj as arg. There are type property
-we will write the type on this property.
+3. we need to use value property on current property on hook var to get this field data.
+    ===>
+        console.log(nameRef.current.value);
 
-const ReducerCount = () => {
-    const [count, setCount] = useState(0);
-    const [state, dispatch] = useReducer(reducer, initialState);
-    return (
-        <div>
-            <h1>This is Reducer Count: {state.count}</h1>
-            <button onClick={()=>dispatch({type:"INCREMENT"})}>increment</button>
-            <button onClick={()=>dispatch({type:"DECREMENT"})}>Decrement</button>
-        </div>
-    );
-};
+
+=============================
+
+4. we need to send data as key value pair on dispatch() method  object arg. to store 
+it on redux store. this obj must have type property.
+    ===>
+        dispatch({type:"ADD_PATIENT", name:"Md. Test", id:1});
+
+5. we need to access this data on action obj arg of reducer method. 
+    ===>
+        export const patientState = {
+            patients:[]
+        };
+
+        export const patientReducer = (state, action) => {
+            switch(action.type){
+                case "ADD_PATIENT":
+                    const newPatient = {
+                        id: action.id,
+                        name: action.name,
+                    }
+                    const allPatients = [...state.patients, newPatient];
+                    return {patients:allPatients}; 
+                case "REMOVE_PATIENT":
+                    const remaining = state.patients.filter(pt => pt.id !== action.id);
+                    const newState = {patients:remaining};
+                    return newState;
+                default:
+                    return state;
+            }
+        }
